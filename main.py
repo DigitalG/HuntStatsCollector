@@ -20,13 +20,4 @@ def write_parsed_data_in_json(xml_data_path):
     return
 
 
-# for entry_num in sorted(mission_teams_dict.keys()):
-#     print(f"{entry_num} ---")
-#     for key, value in mission_teams_dict[entry_num].items():
-#         print(f"\t{key} : {value}")
-# долбайоб насрав закоментованого в мейн бренчу сука блять "ой а нахуя нам ото блять пуш в мастер сука"
-# (мідл кстате 2.5 зпшка)
-# він може коменти потім видалити но тіпа ця історія збережеться
-print(json.dumps(mission_teams_dict, sort_keys=True, indent=4))
-
-# якшо даня прочитав це то він ебать лох пізда
+file_watcher(xml_data_path, 1, write_parsed_data_in_json, xml_data_path)
