@@ -1,3 +1,7 @@
+import string
+import vdf
+
+
 def get_steam_path():
     import sys
     import winreg
@@ -7,5 +11,16 @@ def get_steam_path():
     return path[0]
 
 
+def findGame(gameIdToFind: string):
+    vdfPath = get_steam_path() + "\steamapps\libraryfolders.vdf"
+    vdfFile = vdf.load(open(vdfPath))
+    steamLibs = vdfFile["libraryfolders"]
+    for i in steamLibs:
+        steamApps = steamLibs[i]["apps"]
+        for gameId in steamApps:
+            if gameId == gameIdToFind:
+                return steamLibs[i]["path"]
+
+
 if __name__ == "__main__":
-    print(get_steam_path())
+    print(findGame("594650"))
