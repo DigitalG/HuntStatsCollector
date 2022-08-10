@@ -1,8 +1,8 @@
+import difflib
 import time
 
+d = difflib.Differ()
 
-OUTPUT_PATH = "data\\matches\\"
-
-
-with open(f"data/abc.txt", "x") as f:
-    print(1)
+diff = d.compare(["123123123---123123"], ["123123123123123123"])
+with open("compare.txt", "w") as f:
+    f.writelines(diff)
