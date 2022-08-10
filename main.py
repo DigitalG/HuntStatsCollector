@@ -1,10 +1,10 @@
 import json
 from lxml import etree
 
-from steampath import get_steam_path
+from steampath import get_steam_library_path_for_game_id
 
 
-steam_path = get_steam_path()
+steam_path = get_steam_library_path_for_game_id("594650")
 xml_data_path = f"{steam_path}\\steamapps\\common\\Hunt Showdown\\user\\profiles\\default\\attributes.xml"
 with open(xml_data_path, "r", encoding="UTF-8") as f:
     xml_data = f.read()
