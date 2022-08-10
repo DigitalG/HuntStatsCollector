@@ -2,7 +2,7 @@ import string
 import vdf
 
 
-def get_main_steam_path():
+def get_main_steam_path() -> str:
     import sys
     import winreg
 
@@ -13,7 +13,7 @@ def get_main_steam_path():
     return path[0]
 
 
-def get_steam_library_path_for_game_id(game_id_to_find: string):
+def get_steam_library_path_for_game_id(game_id_to_find: string) -> str:
     vdf_path = get_main_steam_path() + "\\steamapps\\libraryfolders.vdf"
     vdf_file = vdf.load(open(vdf_path))
     steam_libs = vdf_file["libraryfolders"]

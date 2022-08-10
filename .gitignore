@@ -295,4 +295,7 @@ cython_debug/
 # Ignore code-workspaces
 *.code-workspace
 
-# End of https://www.toptal.com/developers/gitignore/api/python,pycharm,visualstudiocode
+
+
+# Ignore generated data
+data/matches
