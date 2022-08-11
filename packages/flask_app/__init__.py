@@ -24,7 +24,7 @@ def create_app(match_data_folder_path, test_config=None):
         app.config.from_mapping(test_config)
 
     app.config["MATCH_DATA_FOLDER_PATH"] = match_data_folder_path
-    app.stats_provider = StatsProvider(match_data_folder_path)
+    app.stats_provider: StatsProvider = StatsProvider(match_data_folder_path)
 
     # ensure the instance folder exists
     try:
@@ -39,6 +39,15 @@ def create_app(match_data_folder_path, test_config=None):
         ctx = {}
         ctx.update({"match_ids": match_ids})
         return render_template("index.html", **ctx)
+
+    @app.route("/match/<match_id>")
+    def match(match_id):
+        match_data = app.stats_provider.get_match_by_id(match_id)
+        own_team = match_data.get_self_team()
+        other_teams = match_data.get_other_teams()
+        print(other_teams)
+        ctx = {"own_team": own_team, "other_teams": other_teams}
+        return render_template("match.html", **ctx)
 
     return app
 

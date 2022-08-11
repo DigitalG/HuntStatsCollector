@@ -9,7 +9,24 @@
 </head>
 
 <body>
+    {% for id,team in other_teams.items() %}
+        <p>mmr - {{ team["mmr"] }}</p>
+        <h3>team {{loop.index}}</h3>
+        {% for id, player in team["players"].items() %}
+            <p>{{ player["blood"] }} -- {{player["mmr"]}} </p>
+        {% endfor %}
+    {% endfor %}
 
+    <p>mmr - {{ own_team["mmr"] }}</p>
+    <h3>Your team</h3>
+
+    {% for id,player in own_team["players"].items() %}
+        <p>
+        {% if player["ispartner"] == "false" %}
+            (You) 
+        {% endif %} 
+        {{ player["blood"] }} -- {{player["mmr"]}} </p>
+    {% endfor %}
 </body>
 
 </html>

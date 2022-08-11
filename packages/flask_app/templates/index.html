@@ -12,8 +12,11 @@
 <body>
     <div class="bg-red-500"> Huyna </div>
     {% for id in match_ids %}
-    <p>{{ id }}</p>
+    <a class="inline-block text-cyan-600 underline" href={{ url_for('match', match_id=id) }}>Match {{ id }}</a>
+    <br>
     {% endfor %}
+
+    <img style="transform-origin: 67% 67%" class="absolute bottom-0 right-0 animate-spin m-10 w-16 h-16" src="{{ url_for('static', filename='img/Pepe_clown.png') }}" alt="">
 </body>
 
 </html>
