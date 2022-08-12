@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %} | Hunt Stats Collector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+</head>
+<body class="bg-gray-900 text-gray-200">
+    <header class="h-10 bg-gray-700 rounded-b-md flex">
+        <span style="line-height: 40px" class="text-gray-200 h-full mx-5 my-auto text-2xl">HUNT STATS COLLECTOR</span>
+        <a style="line-height: 40px" class="text-gray-200 font-bold h-full mx-5 my-auto" href="{{ url_for('index') }}">Match List</a>
+    </header>
+    <div class="mx-8 my-8">
+    {% block body %}
+
+    {% endblock body %}
+    </div>
+    <img 
+        style="transform-origin: 67% 67%"
+        class="absolute bottom-0 right-0 animate-spin m-10 w-16 h-16" 
+        src="{{ url_for('static', filename='img/Pepe_clown.png') }}" 
+        alt=""
+    >
+</body>
+</html>

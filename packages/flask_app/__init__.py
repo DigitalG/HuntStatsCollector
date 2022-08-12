@@ -35,18 +35,25 @@ def create_app(match_data_folder_path, test_config=None):
     # a simple page that says hello
     @app.route("/")
     def index():
-        match_ids = app.stats_provider.get_match_ids()
+        app.stats_provider.update()
+        index_data = app.stats_provider.get_index_data()
         ctx = {}
-        ctx.update({"match_ids": match_ids})
+        ctx.update({"index_data": index_data})
         return render_template("index.html", **ctx)
 
     @app.route("/match/<match_id>")
     def match(match_id):
+        app.stats_provider.update()
         match_data = app.stats_provider.get_match_by_id(match_id)
         own_team = match_data.get_self_team()
         other_teams = match_data.get_other_teams()
-        print(other_teams)
-        ctx = {"own_team": own_team, "other_teams": other_teams}
+        monsters_stats = match_data.get_monsters_stats()
+        ctx = {
+            "own_team": own_team,
+            "other_teams": other_teams,
+            "match_id": match_id,
+            "monsters_stats": monsters_stats,
+        }
         return render_template("match.html", **ctx)
 
     return app

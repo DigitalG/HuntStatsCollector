@@ -1,14 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "layouts/base.html" %}
+{% block title %}
+Match {{ match_id }}
+{% endblock title %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Match {{ id }} | Hunt Stats Collector</title>
-</head>
-
-<body>
+{% block body %}
+<div class="bg-gray-700 rounded-b-md">
+    <h1 class="text-3xl text-center">Match {{match_id}}</h1>
+    <h2 class="text-2xl">Stats</h2>
+    <h3 class="text-xl">Monsters</h3>
+    <ul class="list-disc list-inside ml-8">
+        <li>Total Monsters Killed: {{monsters_stats["monsters_killed"]}}</li>
+        <li>Total XP: {{monsters_stats["xp"]}}</li>
+        <li>Blood Bounds from Monsters: {{monsters_stats["blood_bonds"]}} {% include "includes/blood_bonds_icon.html" %}</li>
+        <li>Details:
+            <ul class="list-disc list-inside ml-8">
+                {% for monster_name, details in monsters_stats["details"].items()%}
+                    <li>{{ monster_name }}: {{details["amount"]}} (Total XP: {{details["xp"]}})</li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
     {% for id,team in other_teams.items() %}
         <p>mmr - {{ team["mmr"] }}</p>
         <h3>team {{loop.index}}</h3>
@@ -27,6 +38,6 @@
         {% endif %} 
         {{ player["blood"] }} -- {{player["mmr"]}} </p>
     {% endfor %}
-</body>
 
-</html>
+</div>
+{% endblock body %}

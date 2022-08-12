@@ -1,5 +1,6 @@
 import hashlib
 import json
+import sys
 import time
 import os
 
@@ -37,7 +38,7 @@ def write_parsed_data_in_json(xml_data_path):
             return
 
     # Creating new JSOn file with parsed data. Name is generated from time since Epoch.
-    with open(f"{MATCHES_DATA_PATH}{time.time_ns()}.json", "x") as f:
+    with open(f"{MATCHES_DATA_PATH}{time.time()}.json", "x") as f:
         f.write(json.dumps(parsed_data, indent=4, sort_keys=True))
     print("New match detected | New entry is added")
 
@@ -53,9 +54,13 @@ def setup():
     (f"Output folder set up: {MATCHES_DATA_PATH}")
 
 
-# Starting watcher here
+# TODO: Split into thread so both can run simultaniously
 if __name__ == "__main__":
-    # setup()
-    # file_watcher(xml_data_path, 10, write_parsed_data_in_json, xml_data_path)
-    app = create_app(MATCHES_DATA_PATH, test_config=None)
-    app.run(host="127.0.0.1", port=8000, debug=True)
+    arguments = sys.argv
+    if "-w" in arguments or "--watch" in arguments:
+        setup()
+        file_watcher(xml_data_path, 10, write_parsed_data_in_json, xml_data_path)
+
+    if "--ui" in arguments:
+        app = create_app(MATCHES_DATA_PATH, test_config=None)
+        app.run(host="127.0.0.1", port=8000, debug=True)

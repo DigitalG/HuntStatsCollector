@@ -1,8 +1,6 @@
-import difflib
+from datetime import datetime
 import time
 
-d = difflib.Differ()
+today = datetime.fromtimestamp(1660336160646607900 / 1000)
 
-diff = d.compare(["123123123---123123"], ["123123123123123123"])
-with open("compare.txt", "w") as f:
-    f.writelines(diff)
+print(today.ctime())
